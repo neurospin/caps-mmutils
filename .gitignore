@@ -1,20 +1,16 @@
 # Compiled source #
 ###################
 *.o
-*.c
-*.cpp
 *.so
 *.pyc
-*.pyo
 
 # Logs and databases #
 ######################
 *.log
 *~
+.coverage
 
 # Folders #
 ###########
-/build/
-/generated/
-/dist/
-/mmutils.egg-info/
+*.egg*/
+build/
