@@ -15,23 +15,25 @@ import gzip
 def element_to_list(element):
     """ Set an element to an empty list.
 
-    <process>
-        <return name="adaptedelement" type="List_Any" desc="the returned
-            list containing the input element only."/>
-        <input name="element" type="Any" desc="an input element."/>
-    </process>
+    <unit>
+        <input name="element" type="Any" description="an input element." />
+        <output name="adaptedelement" type="List" content="Any" desc="the
+            returned list containing the input element only."/>
+    </unit>
     """
-    return [element]
+    adaptedelement = [element]
+    return adaptedelement
 
 
 def list_to_element(listobj):
     """ Get the singleton list element.
 
-    <process>
-        <return name="element" type="Any" desc="the returned
+    <unit>
+        <input name="listobj" type="List" content="Any" desc="an input
+            singleton list."/>
+        <output name="element" type="Any" desc="the returned
             list single element."/>
-        <input name="listobj" type="List_Any" desc="an input singleton list."/>
-    </process>
+    </unit>
     """
     # Check that we have a singleton list
     if len(listobj) != 1:
@@ -43,15 +45,15 @@ def list_to_element(listobj):
 def ungzip_file(fname, prefix="u", output_directory=None):
     """ Copy and ungzip the input file.
 
-    <process>
-        <return name="ungzipfname" type="File" desc="the returned
-            ungzip file."/>
+    <unit>
         <input name="fname" type="File" desc="an input file to ungzip."/>
         <input name="prefix" type="String" desc="the prefix of the result
             file."/>
         <input name="output_directory" type="Directory" desc="the output
             directory where ungzip file is saved."/>
-    </process>
+        <output name="ungzipfname" type="File" desc="the returned
+            ungzip file."/>
+    </unit>
     """
     # Check the input file exists on the file system
     if not os.path.isfile(fname):
@@ -94,15 +96,15 @@ def ungzip_file(fname, prefix="u", output_directory=None):
 def gzip_file(fname, prefix="g", output_directory=None):
     """ Copy and gzip the input file.
 
-    <process>
-        <return name="gzipfname" type="File" desc="the returned
-            gzip file."/>
+    <unit>
         <input name="fname" type="File" desc="an input file to gzip."/>
         <input name="prefix" type="String" desc="the prefix of the result
             file."/>
         <input name="output_directory" type="Directory" desc="the output
             directory where gzip file is saved."/>
-    </process>
+        <output name="gzipfname" type="File" desc="the returned
+            gzip file."/>
+    </unit>
     """
     # Check the input file exists on the file system
     if not os.path.isfile(fname):
@@ -117,9 +119,9 @@ def gzip_file(fname, prefix="g", output_directory=None):
         output_directory = os.path.dirname(fname)
 
     # Get the file descriptors
-    base, extension = os.path.splitext(input_image)
+    base, extension = os.path.splitext(fname)
 
-    # Ungzip only non compressed file
+    # Gzip only non compressed file
     if extension not in [".gz"]:
 
         # Generate the output file name
@@ -141,10 +143,10 @@ def gzip_file(fname, prefix="g", output_directory=None):
 def spm_tissue_probability_maps():
     """ SPM tissue probability maps.
 
-    <process>
-        <return name="tpm_struct" type="List_Any" desc="a struct containing the
-            spm tissue probability map descriptions."/>
-    </process>
+    <unit>
+        <output name="tpm_struct" type="List" content="Any" desc="a struct
+            containing the spm tissue probability map descriptions."/>
+    </unit>
     """
     # Try to import the resource
     try:
@@ -160,6 +162,23 @@ def spm_tissue_probability_maps():
     tissue4 = ((tmp_file, 4), 3, (False, False), (False, False))
     tissue5 = ((tmp_file, 5), 4, (False, False), (False, False))
 
-    return [tissue1, tissue2, tissue3, tissue4, tissue5]
+    tpm_struct = [tissue1, tissue2, tissue3, tissue4, tissue5]
+    return tpm_struct
 
+
+def noprocess_switch(input_value):
+    """
+    Do nothing, returns the input value
+    Used in switch
+
+    <unit>
+        <input name="input_value" type="Any" desc="a variable to let through"/>
+        <output name="output_value" type="Any" desc="the input value"/>
+
+    </unit>
+    """
+
+    out = input_value
+
+    return out
 
