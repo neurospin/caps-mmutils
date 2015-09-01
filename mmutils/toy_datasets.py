@@ -37,9 +37,11 @@ SAMPLE_DATE_FILES = {
                 "be408185acf82af7480cb597af3c781c")),
     "qt1": Enum(
         afiamplitude=(
-            "nsap_url", "qt1/bafi_A.nii.gz", "aaeb4024ee7a6770b0fd21cd086bb1d4"),
+            "nsap_url", "qt1/bafi_A.nii.gz",
+            "aaeb4024ee7a6770b0fd21cd086bb1d4"),
         afiphase=(
-            "nsap_url", "qt1/bafi_P.nii.gz", "ece4532d032b54fcd1bb01c7e78cae8c"),
+            "nsap_url", "qt1/bafi_P.nii.gz",
+            "ece4532d032b54fcd1bb01c7e78cae8c"),
         gre5=(
             "nsap_url", "qt1/a5.nii.gz", "9ac4f0caf390c49ac494bb08bafbc1ba"),
         gre20=(
@@ -100,7 +102,8 @@ SAMPLE_DATE_FILES = {
             "eaf1d1d0f3245ddbda912823e286567a")),
     "tpm": Enum(
         all=(
-            "spm_dir", "toolbox/Seg/TPM.nii", "9f7b044ae53708f43887505ab6551024"),
+            "spm_dir", "toolbox/Seg/TPM.nii",
+            "9f7b044ae53708f43887505ab6551024"),
         gm=(
             "spm_dir", "tpm/grey.nii", "331edb3340587dc8ba427eb08badc23f"),
         wm=(
@@ -132,7 +135,8 @@ SAMPLE_DATE_FILES = {
             "nsap_url", "localizer_onsets.csv",
             "7612193b833eece4a85ce369955addde"),
         mouvment_parameters=(
-            "nsap_url", "rp_localizer.txt", "257a67b3fb70e7abe1bfe37fe7c62f3d")),
+            "nsap_url", "rp_localizer.txt",
+            "257a67b3fb70e7abe1bfe37fe7c62f3d")),
     "dwi": Enum(
         dwi=(
             "nsap_url", "DTI30s010.nii", "220f069c259fd0323953dd13817e7ea6"),

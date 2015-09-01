@@ -252,6 +252,7 @@ def download_file_insecure(url, target):
 
 download_file_insecure.viable = lambda: True
 
+
 def get_best_downloader():
     downloaders = (
         download_file_powershell,
