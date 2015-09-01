@@ -32,8 +32,8 @@ def Enum(**enums):
 
 SAMPLE_DATE_FILES = {
     "dicom": Enum(
-        osirix=("osirix_url", "datasets/DATA/ANONYMIZE.zip",
-                "be408185acf82af7480cb597af3c781c")),
+        barre=("barre_url", "medical/samples/files/MR-MONO2-8-16x-heart.gz",
+                "09616c5d91c02b0956947b5a24e2e8f0")),
     "qt1": Enum(
         afiamplitude=(
             "nsap_url", "qt1/bafi_A.nii.gz",
@@ -302,7 +302,7 @@ def get_sample_data(dataset_name, fsl_dir="/usr/share/fsl/4.1",
     nsap_url = "http://nsap.intra.cea.fr/datasets/"
     spm_dir = os.environ.get("SPMDIR", spm_dir)
     fsl_dir = os.environ.get("FSLDIR", fsl_dir)
-    osirix_url = "http://www.osirix-viewer.com"
+    barre_url = "http://barre.nom.fr/"
 
     # Transform the dataset description
     # Replace file path description with file real location on the disk.
@@ -311,7 +311,7 @@ def get_sample_data(dataset_name, fsl_dir="/usr/share/fsl/4.1",
         # If tuple -> file decription
         if isinstance(value, tuple):
             # Get the resource on the web
-            if value[0] in ["nsap_url", "osirix_url"]:
+            if value[0] in ["nsap_url", "barre_url"]:
                 url = os.path.join(eval(value[0]), value[1])
                 local_fname = download_file(url, resume=True, overwrite=False,
                                             md5sum=value[2])
@@ -338,7 +338,7 @@ def get_sample_data(dataset_name, fsl_dir="/usr/share/fsl/4.1",
 
             # Uncompress archive
             filename, ext = os.path.splitext(local_fname)
-            if local_fname.endswith((".zip", "tar.gz", ".tgz", ".bz2")):
+            if local_fname.endswith((".zip", "tar.gz", ".tgz", ".bz2", ".gz")):
                 local_fname = uncompress_file(local_fname)
 
             # Update the enum structure
