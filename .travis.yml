@@ -22,6 +22,8 @@ install:
     - pip install importlib
     - pip install nibabel
     - pip install nose
+    - pip install soma-workflow
+    - pip install capsul
     - pip install nose-exclude
     - pip install coverage
     - pip install coveralls
