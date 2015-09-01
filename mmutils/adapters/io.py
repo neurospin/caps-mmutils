@@ -39,7 +39,9 @@ def list_to_element(listobj):
     if len(listobj) != 1:
         raise ValueError("A list with '{0}' element(s) is not a singleton "
                          "list.".format(len(listobj)))
-    return listobj[0]
+
+    element = listobj[0]
+    return element
 
 
 def ungzip_file(fname, prefix="u", output_directory=None):
@@ -120,12 +122,11 @@ def gzip_file(fname, prefix="g", output_directory=None):
 
     # Get the file descriptors
     base, extension = os.path.splitext(fname)
-
     # Gzip only non compressed file
     if extension not in [".gz"]:
 
         # Generate the output file name
-        basename = prefix + base + ".gz"
+        basename = prefix + os.path.basename(base) + ".gz"
         gzipfname = os.path.join(output_directory, basename)
 
         # Write the output gzip file
@@ -178,7 +179,7 @@ def noprocess_switch(input_value):
     </unit>
     """
 
-    out = input_value
+    output_value = input_value
 
-    return out
+    return output_value
 
