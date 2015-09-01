@@ -182,4 +182,3 @@ def noprocess_switch(input_value):
     output_value = input_value
 
     return output_value
-

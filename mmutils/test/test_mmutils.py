@@ -44,7 +44,8 @@ class TestMMutils(unittest.TestCase):
         pipe2 = get_process_instance('mmutils.adapters.io.list_to_element')
         pipe3 = get_process_instance('mmutils.adapters.io.gzip_file')
         pipe4 = get_process_instance('mmutils.adapters.io.ungzip_file')
-        pipe5 = get_process_instance('mmutils.adapters.io.spm_tissue_probability_maps')
+        pipe5 = get_process_instance('mmutils.adapters.io.'
+                                     'spm_tissue_probability_maps')
         pipe6 = get_process_instance('mmutils.adapters.io.noprocess_switch')
 
         # Set pipeline input parameters

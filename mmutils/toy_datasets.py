@@ -21,7 +21,6 @@ import curses
 import tarfile
 import zipfile
 import gzip
-import tarfile
 
 
 def Enum(**enums):
@@ -85,7 +84,7 @@ SAMPLE_DATE_FILES = {
             "457b2df45e806b35f64f11a98e6b459b"),
         brain=(
             "fsl_dir", "data/standard/MNI152_T1_2mm_brain.nii.gz",
-              "2b2769d1795711c1e040827a4a62433d"),
+            "2b2769d1795711c1e040827a4a62433d"),
         mask=(
             "fsl_dir", "data/standard/MNI152_T1_2mm_brain_mask.nii.gz",
             "84cd8269e63867f77249c4a8967adaf6")),
