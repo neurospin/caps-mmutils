@@ -13,12 +13,10 @@ import os
 import tempfile
 
 # mmutils import
-import mmutils
-from mmutils.adapters.io import (element_to_list, 
+from mmutils.adapters.io import (element_to_list,
                                  list_to_element,
                                  ungzip_file,
-                                 gzip_file,
-                                 noprocess_switch)
+                                 gzip_file)
 
 
 class TestUtils(unittest.TestCase):
@@ -34,10 +32,10 @@ class TestUtils(unittest.TestCase):
         element_to_list("element_test")
         list_to_element(["singleton_element"])
         ungzip_file(os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                   "test_file.gz"),
+                    "test_file.gz"),
                     output_directory=self.outdir)
         gzip_file(os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                   "test_file.txt"),
+                  "test_file.txt"),
                   output_directory=self.outdir)
 
 
@@ -51,4 +49,3 @@ def test():
 
 if __name__ == "__main__":
     test()
-

@@ -85,7 +85,7 @@ def ungzip_file(fname, prefix="u", output_directory=None):
             data = gzfobj.read()
 
         # Write the output ungzip file
-        with open(ungzipfname, "w") as openfile:
+        with open(ungzipfname, "wb") as openfile:
             openfile.write(data)
 
     # Default, unknown compression extension: the input file is returned
