@@ -33,7 +33,7 @@ def Enum(**enums):
 SAMPLE_DATE_FILES = {
     "dicom": Enum(
         barre=("barre_url", "medical/samples/files/MR-MONO2-8-16x-heart.gz",
-                "09616c5d91c02b0956947b5a24e2e8f0")),
+               "09616c5d91c02b0956947b5a24e2e8f0")),
     "qt1": Enum(
         afiamplitude=(
             "nsap_url", "qt1/bafi_A.nii.gz",

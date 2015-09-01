@@ -13,18 +13,15 @@ import os
 # Nilearn import
 from nilearn import plotting
 
-# Matplotlib
-from matplotlib.backends.backend_pdf import PdfPages
-import matplotlib.pyplot as plt
 
-
-def plot_image(input_files, output_directory, edge_file=None, overlay_file=None,
+def plot_image(input_files, output_directory, edge_file=None,
+               overlay_file=None,
                contour_file=None, name=None, overlay_cmap=None):
     """ Plot image with edge/overlay/contour on top (useful for checking
     registration).
 
     <unit>
-        <input name="input_files" type="['List_File', 'File']" desc="An image 
+        <input name="input_files" type="['List_File', 'File']" desc="An image
             or a list of image to be displayed."/>
         <input name="output_directory" type="Directory" description="The
             destination folder."/>
