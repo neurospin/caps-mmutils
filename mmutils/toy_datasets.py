@@ -21,7 +21,6 @@ import curses
 import tarfile
 import zipfile
 import gzip
-import tarfile
 
 
 def Enum(**enums):
@@ -34,12 +33,14 @@ def Enum(**enums):
 SAMPLE_DATE_FILES = {
     "dicom": Enum(
         barre=("barre_url", "medical/samples/files/MR-MONO2-8-16x-heart.gz",
-                "09616c5d91c02b0956947b5a24e2e8f0")),
+               "09616c5d91c02b0956947b5a24e2e8f0")),
     "qt1": Enum(
         afiamplitude=(
-            "nsap_url", "qt1/bafi_A.nii.gz", "aaeb4024ee7a6770b0fd21cd086bb1d4"),
+            "nsap_url", "qt1/bafi_A.nii.gz",
+            "aaeb4024ee7a6770b0fd21cd086bb1d4"),
         afiphase=(
-            "nsap_url", "qt1/bafi_P.nii.gz", "ece4532d032b54fcd1bb01c7e78cae8c"),
+            "nsap_url", "qt1/bafi_P.nii.gz",
+            "ece4532d032b54fcd1bb01c7e78cae8c"),
         gre5=(
             "nsap_url", "qt1/a5.nii.gz", "9ac4f0caf390c49ac494bb08bafbc1ba"),
         gre20=(
@@ -83,7 +84,7 @@ SAMPLE_DATE_FILES = {
             "457b2df45e806b35f64f11a98e6b459b"),
         brain=(
             "fsl_dir", "data/standard/MNI152_T1_2mm_brain.nii.gz",
-              "2b2769d1795711c1e040827a4a62433d"),
+            "2b2769d1795711c1e040827a4a62433d"),
         mask=(
             "fsl_dir", "data/standard/MNI152_T1_2mm_brain_mask.nii.gz",
             "84cd8269e63867f77249c4a8967adaf6")),
@@ -100,7 +101,8 @@ SAMPLE_DATE_FILES = {
             "eaf1d1d0f3245ddbda912823e286567a")),
     "tpm": Enum(
         all=(
-            "spm_dir", "toolbox/Seg/TPM.nii", "9f7b044ae53708f43887505ab6551024"),
+            "spm_dir", "toolbox/Seg/TPM.nii",
+            "9f7b044ae53708f43887505ab6551024"),
         gm=(
             "spm_dir", "tpm/grey.nii", "331edb3340587dc8ba427eb08badc23f"),
         wm=(
@@ -132,7 +134,8 @@ SAMPLE_DATE_FILES = {
             "nsap_url", "localizer_onsets.csv",
             "7612193b833eece4a85ce369955addde"),
         mouvment_parameters=(
-            "nsap_url", "rp_localizer.txt", "257a67b3fb70e7abe1bfe37fe7c62f3d")),
+            "nsap_url", "rp_localizer.txt",
+            "257a67b3fb70e7abe1bfe37fe7c62f3d")),
     "dwi": Enum(
         dwi=(
             "nsap_url", "DTI30s010.nii", "220f069c259fd0323953dd13817e7ea6"),
