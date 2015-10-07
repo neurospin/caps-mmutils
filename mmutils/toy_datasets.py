@@ -162,7 +162,12 @@ SAMPLE_DATE_FILES = {
             "nsap_url", "conn.tar.gz", "2046a4a84a3a57abc65a80b166ea88f8"),
         new_york_dataset=(
             "nsap_url", "NYU_TRT_session1a.tar.gz",
-            "acd4c1316b1dbb491ffa89541cb4ded5"))
+            "acd4c1316b1dbb491ffa89541cb4ded5")),
+    "localizer": Enum(
+        fmri=(
+            "localizer_url", "scan/1091742?&vid=data-zip",
+            "bccfc318cd665a68f2c50e5bd695d63e",
+            "brainomics_data/S18")),
 }
 
 
@@ -300,6 +305,7 @@ def get_sample_data(dataset_name, fsl_dir="/usr/share/fsl/4.1",
 
     # Set the default path where the dataset can be found
     nsap_url = "http://nsap.intra.cea.fr/datasets/"
+    localizer_url = "http://brainomics.cea.fr/localizer/"
     spm_dir = os.environ.get("SPMDIR", spm_dir)
     fsl_dir = os.environ.get("FSLDIR", fsl_dir)
     barre_url = "http://barre.nom.fr/"
@@ -311,10 +317,15 @@ def get_sample_data(dataset_name, fsl_dir="/usr/share/fsl/4.1",
         # If tuple -> file decription
         if isinstance(value, tuple):
             # Get the resource on the web
-            if value[0] in ["nsap_url", "barre_url"]:
+            if value[0] in ["nsap_url", "barre_url", "localizer_url"]:
                 url = os.path.join(eval(value[0]), value[1])
+                print ""
                 local_fname = download_file(url, resume=True, overwrite=False,
                                             md5sum=value[2])
+                # download from localizer does not keep the correct extention
+                if value[0] == "localizer_url":
+                    shutil.move(local_fname, "{0}.zip".format(local_fname))
+                    local_fname = "{0}.zip".format(local_fname)
             # Resource already on the disk
             else:
                 local_fname = os.path.join(eval(value[0]), value[1])
@@ -323,7 +334,7 @@ def get_sample_data(dataset_name, fsl_dir="/usr/share/fsl/4.1",
                                     "directory resource may not be "
                                     "valid.".format(local_fname, value[0]))
 
-            # Check if a valid fill has been found
+            # Check if a valid file has been found
             md5sum = value[2]
             md5sum_upload = md5_sum_file(local_fname)
             logging.info("md5 is '{0}'".format(md5sum_upload))
@@ -340,7 +351,11 @@ def get_sample_data(dataset_name, fsl_dir="/usr/share/fsl/4.1",
             filename, ext = os.path.splitext(local_fname)
             if local_fname.endswith((".zip", "tar.gz", ".tgz", ".bz2", ".gz")):
                 local_fname = uncompress_file(local_fname)
-
+                if value[0] == "localizer_url":
+                    local_fname = os.path.join(
+                        os.path.dirname(local_fname),
+                        value[3],
+                        "raw_fMRI_raw_bold.nii.gz")
             # Update the enum structure
             dataset_description.items[cnt] = (key, local_fname)
             expression = "dataset_description.{0} = '{1}'".format(key,
