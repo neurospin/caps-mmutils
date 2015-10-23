@@ -163,7 +163,7 @@ SAMPLE_DATE_FILES = {
         new_york_dataset=(
             "nsap_url", "NYU_TRT_session1a.tar.gz",
             "acd4c1316b1dbb491ffa89541cb4ded5")),
-    "localizer": Enum(
+    "localizer_extra": Enum(
         fmri=(
             "localizer_url", "scan/1091742?&vid=data-zip",
             "bccfc318cd665a68f2c50e5bd695d63e",
