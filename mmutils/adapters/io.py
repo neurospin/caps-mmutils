@@ -10,6 +10,7 @@
 # System import
 import os
 import gzip
+import shutil
 
 
 def element_to_list(element):
@@ -25,18 +26,20 @@ def element_to_list(element):
     return adaptedelement
 
 
-def list_to_element(listobj):
+def list_to_element(listobj, force=False):
     """ Get the singleton list element.
 
     <unit>
         <input name="listobj" type="List" content="Any" desc="an input
             singleton list."/>
+        <input name="force" type="Bool" optional="True" desc="force conversion
+            even if more then one element in the list" />
         <output name="element" type="Any" desc="the returned
             list single element."/>
     </unit>
     """
     # Check that we have a singleton list
-    if len(listobj) != 1:
+    if len(listobj) != 1 and not force:
         raise ValueError("A list with '{0}' element(s) is not a singleton "
                          "list.".format(len(listobj)))
 
@@ -95,7 +98,8 @@ def ungzip_file(fname, prefix="u", output_directory=None):
     return ungzipfname
 
 
-def gzip_file(fname, prefix="g", output_directory=None):
+def gzip_file(fname, prefix="g", output_directory=None,
+              remove_original_file=False):
     """ Copy and gzip the input file.
 
     <unit>
@@ -104,6 +108,8 @@ def gzip_file(fname, prefix="g", output_directory=None):
             file."/>
         <input name="output_directory" type="Directory" desc="the output
             directory where gzip file is saved."/>
+        <input name="remove_original_file" type="Bool" desc="remove the original
+            file" />
         <output name="gzipfname" type="File" desc="the returned
             gzip file."/>
     </unit>
@@ -126,7 +132,10 @@ def gzip_file(fname, prefix="g", output_directory=None):
     if extension not in [".gz"]:
 
         # Generate the output file name
-        basename = prefix + os.path.basename(base) + ".gz"
+        if prefix:
+            basename = prefix + os.path.basename(base) + ".gz"
+        else:
+            basename = os.path.basename(base) + ".gz"
         gzipfname = os.path.join(output_directory, basename)
 
         # Write the output gzip file
@@ -134,11 +143,36 @@ def gzip_file(fname, prefix="g", output_directory=None):
             with gzip.open(gzipfname, "w") as gzfobj:
                 gzfobj.writelines(openfile)
 
+        if remove_original_file:
+            os.remove(fname)
+
     # Default, the input file is returned
     else:
         gzipfname = fname
 
     return gzipfname
+
+
+def rename_file(input_filepath, output_filepath):
+    """ Rename a file (same loc)
+
+    <unit>
+        <input name="input_filepath" type="File" desc="an input file
+            to rename."/>
+        <input name="output_filepath" type="String" desc="the output
+            filepath."/>
+        <output name="output_file" type="File" desc="the renamed file."/>
+    </unit>
+    """
+
+    if os.path.isfile(output_filepath):
+        raise Exception("Output file exist !")
+    # get output folder
+    shutil.move(input_filepath, output_filepath)
+
+    output_file = output_filepath
+
+    return output_file
 
 
 def spm_tissue_probability_maps():
