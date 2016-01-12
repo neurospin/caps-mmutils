@@ -47,6 +47,26 @@ def list_to_element(listobj, force=False):
     return element
 
 
+def ungzip_list_files(fnames, prefix="u", output_directory=None):
+    """ Copy and ungzip the input files.
+
+    <unit>
+        <input name="fnames" type="List_File" desc="input files to ungzip."/>
+        <input name="prefix" type="String" desc="the prefix of the result
+            file."/>
+        <input name="output_directory" type="Directory" desc="the output
+            directory where ungzip file is saved."/>
+        <output name="ungzipfnames" type="List_File" desc="the returned
+            ungzip files."/>
+    </unit>
+    """
+    ungzipfnames = []
+    for fname in fnames:
+        ungzipfnames.append(ungzip_file(fname, prefix, output_directory))
+
+    return ungzipfnames
+
+
 def ungzip_file(fname, prefix="u", output_directory=None):
     """ Copy and ungzip the input file.
 
@@ -185,7 +205,7 @@ def spm_tissue_probability_maps():
     """
     # Try to import the resource
     try:
-        from caps.toy_datasets import get_sample_data
+        from mmutils.toy_datasets import get_sample_data
     except:
         raise ImportError("Can't import 'caps'.")
     tmp_file = get_sample_data("tpm").all
