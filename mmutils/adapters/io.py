@@ -153,9 +153,9 @@ def gzip_file(fname, prefix="g", output_directory=None,
 
         # Generate the output file name
         if prefix:
-            basename = prefix + os.path.basename(base) + ".gz"
+            basename = prefix + os.path.basename(base) + extension + ".gz"
         else:
-            basename = os.path.basename(base) + ".gz"
+            basename = os.path.basename(base) + extension + ".gz"
         gzipfname = os.path.join(output_directory, basename)
 
         # Write the output gzip file
