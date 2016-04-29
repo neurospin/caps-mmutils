@@ -13,6 +13,22 @@ import gzip
 import shutil
 
 
+def normalize_array(filepath):
+    """ Get a numpy array from a file and normalize column by column
+
+    <process capsul_xml="2.0">
+        <input name="filepath" type="file" doc="the input file containing the numpy array"/>
+        <return name="outfile" type="file" doc="the output file with normalized array"/>
+    </process>
+    """
+    # load input file
+    array = numpy.loadtxt(filepath)
+    array = (array - array.mean(axis=0)) / array.std(axis=0)
+    outfile = filepath
+    numpy.savetxt(outfile, array, fmt="%5.8f")
+
+    return outfile
+
 def element_to_list(element):
     """ Set an element to an empty list.
 
