@@ -207,11 +207,14 @@ def rename_file(input_filepath, output_filepath):
     return output_file
 
 
-def spm_tissue_probability_maps():
+def spm_tissue_probability_maps(fsl_dir="/usr/share/fsl/4.1",
+                                spm_dir="/i2bm/local/spm8/"):
     """ SPM tissue probability maps.
 
     
     <process capsul_xml="2.0">
+      <input name="fsl_dir" type="string" doc="the fsl repository"/>
+      <input name="spm_dir" type="string" doc="the spm repository"/>
       <return name="tpm_struct" type="list_any" doc="a struct containing the spm tissue probability map descriptions."/>
     </process>
     
@@ -221,7 +224,11 @@ def spm_tissue_probability_maps():
         from mmutils.toy_datasets import get_sample_data
     except:
         raise ImportError("Can't import 'caps'.")
-    tmp_file = get_sample_data("tpm").all
+
+    if "spm8" in spm_dir:
+        tmp_file = get_sample_data("tpm", fsl_dir=fsl_dir, spm_dir=spm_dir).all
+    else:
+        tmp_file = os.path.join(spm_dir, "tpm", "TPM.nii")
 
     # Format the tpm for spm
     tissue1 = ((tmp_file, 1), 2, (True, True), (False, True))
@@ -229,8 +236,9 @@ def spm_tissue_probability_maps():
     tissue3 = ((tmp_file, 3), 2, (True, False), (False, False))
     tissue4 = ((tmp_file, 4), 3, (False, False), (False, False))
     tissue5 = ((tmp_file, 5), 4, (False, False), (False, False))
+    tissue6 = ((tmp_file, 6), 2, (False, False), (False, False))
 
-    tpm_struct = [tissue1, tissue2, tissue3, tissue4, tissue5]
+    tpm_struct = [tissue1, tissue2, tissue3, tissue4, tissue5, tissue6]
     return tpm_struct
 
 
