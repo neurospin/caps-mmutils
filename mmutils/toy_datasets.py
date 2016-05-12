@@ -245,7 +245,7 @@ def uncompress_file(fname, delete_archive=False):
 
 
 def get_sample_data(dataset_name, fsl_dir="/usr/share/fsl/4.1",
-                    spm_dir="/i2bm/local/spm8-5236/"):
+                    spm_dir="/i2bm/local/spm8/"):
     """ Get a sample dataset.
 
     This function loads the requested dataset, downloading

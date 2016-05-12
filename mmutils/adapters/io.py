@@ -126,7 +126,7 @@ def gzip_file(fname, prefix="g", output_directory=None):
     if extension not in [".gz"]:
 
         # Generate the output file name
-        basename = prefix + os.path.basename(base) + ".gz"
+        basename = prefix + os.path.basename(base) + extension + ".gz"
         gzipfname = os.path.join(output_directory, basename)
 
         # Write the output gzip file
@@ -151,7 +151,7 @@ def spm_tissue_probability_maps():
     """
     # Try to import the resource
     try:
-        from caps.toy_datasets import get_sample_data
+        from mmutils.toy_datasets import get_sample_data
     except:
         raise ImportError("Can't import 'caps'.")
     tmp_file = get_sample_data("tpm").all
