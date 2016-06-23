@@ -349,7 +349,7 @@ def get_sample_data(dataset_name, fsl_dir="/usr/share/fsl/4.1",
 
             # Uncompress archive
             filename, ext = os.path.splitext(local_fname)
-            if local_fname.endswith((".zip", "tar.gz", ".tgz", ".bz2", ".gz")):
+            if local_fname.endswith((".zip", "tar.gz", ".tgz", ".bz2")):
                 local_fname = uncompress_file(local_fname)
                 if value[0] == "localizer_url":
                     local_fname = os.path.join(
